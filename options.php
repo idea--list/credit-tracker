@@ -385,16 +385,18 @@ function credittracker_page_init()
         )
     );
 
-    add_settings_field(
-        'ct_override_caption_thumbnail',
-        __('Thumbnail', CREDITTRACKER_SLUG),
-        'credittracker_checkbox_field_callback',
+	add_settings_field(
+        'ct_override_featured_image_caption',
+        __('Featured Image', CREDITTRACKER_SLUG),
+        'credittracker_FI_radio_button_callback',
         CREDITTRACKER_SLUG,
         'CREDITTRACKER_COMMON_SETTINGS',
         array(
-            'id' => 'ct_override_caption_thumbnail',
-            'caption' => __('Add credit to the post thumbnail (featured image)', CREDITTRACKER_SLUG),
-            'description' => __('', CREDITTRACKER_SLUG),
+            'id' => 'ct_override_featured_image_caption',
+            'caption1' => __('Do not generate credit tracker caption automatically for featured images', CREDITTRACKER_SLUG),
+			'caption2' => __('Generate credit tracker caption automatically for featured images except that of the starting page', CREDITTRACKER_SLUG),
+			'caption3' => __('Generate credit tracker caption automatically for featured images including that of the starting page', CREDITTRACKER_SLUG),
+            'description' => __('<i>(If you have chosen the first or second option and you still find a caption for the featured image of the starting page, that is coded in your theme)</i>', CREDITTRACKER_SLUG),
         )
     );
 
@@ -469,6 +471,18 @@ function credittracker_checkbox_field_callback($args)
     echo "<p class='description'>$description</p>";
 }
 
+function credittracker_FI_radio_button_callback($args)
+{
+    $id = $args['id'];
+    $caption1 = $args['caption1'];
+	$caption2 = $args['caption2'];
+	$caption3 = $args['caption3'];
+    $description = $args['description'];
+    $value = credittracker_get_single_option($id);
+    echo "<input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='1' class='code' " . checked(1, $value, false) . " /> $caption1</br><input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='2' class='code' " . checked(2, $value, false) . " /> $caption2</br><input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='3' class='code' " . checked(3, $value, false) . " /> $caption3</br>";
+    echo "<p class='description'>$description</p>";
+}
+
 /**
  * Returns default options.
  * If you override the options here, be careful to use escape characters!
@@ -480,7 +494,8 @@ function credittracker_get_default_options()
         'ct_copyright_format' => '&copy; %author%',
         'ct_auth_flickr_apikey' => '',
         'ct_override_caption_shortcode' => '0',
-        'ct_override_caption_thumbnail' => '0'
+        'ct_override_caption_thumbnail' => '0',
+		'ct_override_featured_image_caption' => '0'
     );
     return $default_options;
 }
