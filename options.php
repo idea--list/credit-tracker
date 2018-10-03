@@ -475,8 +475,8 @@ function credittracker_FI_radio_button_callback($args)
 {
     $id = $args['id'];
     $caption1 = $args['caption1'];
-	$caption2 = $args['caption2'];
-	$caption3 = $args['caption3'];
+    $caption2 = $args['caption2'];
+    $caption3 = $args['caption3'];
     $description = $args['description'];
     $value = credittracker_get_single_option($id);
     echo "<input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='1' class='code' " . checked(1, $value, false) . " /> $caption1</br><input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='2' class='code' " . checked(2, $value, false) . " /> $caption2</br><input type='radio' id='$id' name='CREDITTRACKER_OPTIONS[$id]' value='3' class='code' " . checked(3, $value, false) . " /> $caption3</br>";
