@@ -494,8 +494,7 @@ function credittracker_get_default_options()
         'ct_copyright_format' => '&copy; %author%',
         'ct_auth_flickr_apikey' => '',
         'ct_override_caption_shortcode' => '0',
-        'ct_override_caption_thumbnail' => '0',
-		'ct_override_featured_image_caption' => '0'
+	'ct_override_featured_image_caption' => '0'
     );
     return $default_options;
 }
